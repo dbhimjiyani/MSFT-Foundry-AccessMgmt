@@ -1,0 +1,32 @@
+{
+  "Name": "DeepSeek Model Reader",
+  "Id": null,
+  "IsCustom": true,
+  "Description": "Allows read-only access to DeepSeek models in AI Foundry. Users with this role can view and use DeepSeek models but cannot deploy, delete, or modify them.",
+  "Actions": [
+    "Microsoft.MachineLearningServices/workspaces/read",
+    "Microsoft.MachineLearningServices/workspaces/models/read",
+    "Microsoft.MachineLearningServices/workspaces/models/versions/read",
+    "Microsoft.MachineLearningServices/workspaces/endpoints/read",
+    "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/read",
+    "Microsoft.CognitiveServices/accounts/read",
+    "Microsoft.CognitiveServices/accounts/listkeys/action"
+  ],
+  "NotActions": [
+    "Microsoft.MachineLearningServices/workspaces/models/write",
+    "Microsoft.MachineLearningServices/workspaces/models/delete",
+    "Microsoft.MachineLearningServices/workspaces/models/versions/write",
+    "Microsoft.MachineLearningServices/workspaces/models/versions/delete",
+    "Microsoft.MachineLearningServices/workspaces/endpoints/write",
+    "Microsoft.MachineLearningServices/workspaces/endpoints/delete",
+    "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/write",
+    "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/delete",
+    "Microsoft.MachineLearningServices/workspaces/deployments/write",
+    "Microsoft.MachineLearningServices/workspaces/deployments/delete"
+  ],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/{subscription-id}"
+  ]
+}

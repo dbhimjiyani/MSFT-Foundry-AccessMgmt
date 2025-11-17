@@ -1,0 +1,78 @@
+{
+  "properties": {
+    "displayName": "Require Admin Approval for DeepSeek Model Deployments",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy enforces that DeepSeek model deployments must be tagged with admin approval before deployment. Deployments without the 'AdminApproved' tag will be denied.",
+    "metadata": {
+      "category": "AI and Machine Learning",
+      "version": "1.0.0"
+    },
+    "parameters": {
+      "effect": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Effect",
+          "description": "The effect determines what happens when the policy rule is evaluated to match"
+        },
+        "allowedValues": [
+          "Audit",
+          "Deny",
+          "Disabled"
+        ],
+        "defaultValue": "Deny"
+      },
+      "requiredTagKey": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Required Tag Key",
+          "description": "The tag key that must be present on DeepSeek model deployments"
+        },
+        "defaultValue": "AdminApproved"
+      },
+      "requiredTagValue": {
+        "type": "String",
+        "metadata": {
+          "displayName": "Required Tag Value",
+          "description": "The tag value that indicates admin approval"
+        },
+        "defaultValue": "true"
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments"
+          },
+          {
+            "anyOf": [
+              {
+                "field": "name",
+                "contains": "deepseek"
+              },
+              {
+                "field": "tags",
+                "contains": "deepseek"
+              },
+              {
+                "field": "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments/model.name",
+                "contains": "deepseek"
+              }
+            ]
+          },
+          {
+            "not": {
+              "field": "[concat('tags[', parameters('requiredTagKey'), ']')]",
+              "equals": "[parameters('requiredTagValue')]"
+            }
+          }
+        ]
+      },
+      "then": {
+        "effect": "[parameters('effect')]"
+      }
+    }
+  }
+}
