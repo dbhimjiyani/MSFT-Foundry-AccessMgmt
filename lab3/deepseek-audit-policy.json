@@ -1,0 +1,40 @@
+{
+  "properties": {
+    "displayName": "Audit DeepSeek Model Deployments",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "This policy audits all DeepSeek model deployments and logs them for review. This is useful for monitoring and compliance.",
+    "metadata": {
+      "category": "AI and Machine Learning",
+      "version": "1.0.0"
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "in": [
+              "Microsoft.MachineLearningServices/workspaces/onlineEndpoints/deployments",
+              "Microsoft.MachineLearningServices/workspaces/models"
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "field": "name",
+                "contains": "deepseek"
+              },
+              {
+                "field": "tags.ModelFamily",
+                "equals": "DeepSeek"
+              }
+            ]
+          }
+        ]
+      },
+      "then": {
+        "effect": "Audit"
+      }
+    }
+  }
+}

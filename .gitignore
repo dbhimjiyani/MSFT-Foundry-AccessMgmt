@@ -1,0 +1,32 @@
+# Generated configuration files
+*-config.env
+ai-foundry-config.env
+rbac-config.env
+policy-config.env
+
+# Generated documentation
+role-permissions-summary.md
+deployment-workflow.md
+testing-guide.md
+cleanup-summary.txt
+
+# Deployed role definitions
+*-deployed.json
+
+# Temporary files
+*.tmp
+*.temp
+.DS_Store
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Azure CLI cache
+.azure/
+
+# Log files
+*.log
